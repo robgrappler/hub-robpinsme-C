@@ -1,15 +1,24 @@
 ---
 import "../styles/global.css";
 
-const nowLive = [
-  { title: "Link One", href: "#", note: "Placeholder" },
-  { title: "Link Two", href: "#", note: "Placeholder" },
-  { title: "Link Three", href: "#", note: "Placeholder" },
+const currentDrop = {
+  title: "Watch the Latest Match",
+  href: "/latest", // Assumption: placeholder or actual link
+  note: "Primary Access",
+};
+
+const coreLinks = [
+  {
+    title: "Subscribe / Full Access",
+    href: "/subscribe",
+    note: "Join the inner circle",
+  },
+  { title: "Store", href: "/store", note: "Official Merch" },
 ];
 
-const extras = [
-  { title: "Extra One", href: "#", note: "Placeholder" },
-  { title: "Extra Two", href: "#", note: "Placeholder" },
+const optionalLinks = [
+  { title: "About", href: "/about", note: "Mission Statement" },
+  { title: "Contact", href: "/contact", note: "Get in touch" },
 ];
 ---
 
@@ -17,81 +26,142 @@ const extras = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>tap.robpins.me</title>
+    <title>HUB | Robgrappler</title>
     <!-- Analytics placeholder: add here if needed -->
   </head>
-  <body class="bg-zinc-950 text-zinc-100">
-    <main class="min-h-screen px-6 py-10">
-      <div class="mx-auto w-full max-w-2xl space-y-12">
-        <section class="space-y-4" aria-labelledby="hero-title">
+  <body
+    class="bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-zinc-200"
+  >
+    <main class="min-h-screen px-6 py-10 relative overflow-hidden">
+      <!-- Background Mood (Header Only) -->
+      <div class="absolute top-0 left-0 w-full h-96 pointer-events-none z-0">
+        <div
+          class="absolute inset-0 bg-[url('/assets/bg/hub-header-texture.jpg')] bg-cover bg-center opacity-[0.10] mix-blend-overlay"
+        >
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-950"
+        >
+        </div>
+      </div>
+
+      <div class="relative z-10 mx-auto w-full max-w-2xl space-y-12">
+        <header
+          class="space-y-4 text-center sm:text-left"
+          aria-labelledby="page-title"
+        >
           <div class="space-y-2">
-            <p class="text-xs uppercase tracking-[0.35em] text-zinc-400">Tap Switchboard</p>
-            <h1 id="hero-title" class="text-3xl font-semibold text-zinc-50">tap.robpins.me</h1>
-            <p class="text-sm text-zinc-400">Primary links and current drops.</p>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            <a
-              class="rounded-md border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:border-zinc-500"
-              href="#"
+            <h1
+              id="page-title"
+              class="text-xs uppercase tracking-[0.35em] text-zinc-500 font-bold"
             >
-              Primary Button
-            </a>
-            <a
-              class="rounded-md border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
-              href="#"
-            >
-              Secondary Button
-            </a>
+              HUB
+            </h1>
+            <p class="text-3xl font-semibold text-zinc-50 tracking-tight">
+              All current drops and access points.
+            </p>
           </div>
+        </header>
+
+        <!-- CURRENT DROP (Primary) -->
+        <section aria-label="Current Drop">
+          <div class="flex items-center justify-between mb-4">
+            <h2
+              class="text-xs uppercase tracking-[0.25em] text-zinc-500 font-semibold"
+            >
+              Current Drop
+            </h2>
+          </div>
+          <a
+            href={currentDrop.href}
+            class="block group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 p-8 hover:border-zinc-600 transition-all duration-300 hover:shadow-lg hover:shadow-zinc-900/50"
+          >
+            <div
+              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            >
+              <div>
+                <h3
+                  class="text-xl font-bold text-white mb-1 group-hover:text-zinc-200 transition-colors"
+                >
+                  {currentDrop.title}
+                </h3>
+                <p class="text-sm text-zinc-400">{currentDrop.note}</p>
+              </div>
+              <span
+                class="btn btn-sm btn-outline btn-neutral rounded-md px-5 border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white hover:border-zinc-500 transition-all"
+              >
+                OPEN
+              </span>
+            </div>
+            <!-- Subtle glow effect -->
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-zinc-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            >
+            </div>
+          </a>
         </section>
 
-        <section class="space-y-4" aria-labelledby="now-live-title">
+        <!-- CORE LINKS (Secondary) -->
+        <section aria-label="Core Links" class="space-y-4">
           <div class="flex items-center justify-between">
-            <h2 id="now-live-title" class="text-lg font-semibold text-zinc-100">NOW LIVE</h2>
-            <span class="text-xs uppercase tracking-[0.25em] text-zinc-500">Updated</span>
+            <h2
+              class="text-xs uppercase tracking-[0.25em] text-zinc-500 font-semibold"
+            >
+              Core Links
+            </h2>
           </div>
           <ul class="space-y-3">
-            {nowLive.map((item) => (
-              <li class="flex flex-col gap-2 rounded-lg border border-zinc-900 bg-zinc-950/60 p-4">
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-medium text-zinc-100">{item.title}</p>
-                    <p class="text-xs text-zinc-500">{item.note}</p>
-                  </div>
+            {
+              coreLinks.map((item) => (
+                <li>
                   <a
-                    class="rounded-md border border-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
                     href={item.href}
+                    class="card card-side card-compact bg-zinc-950/60 border border-zinc-900 p-4 rounded-lg hover:border-zinc-700 transition-colors group"
                   >
-                    Open
+                    <div class="card-body flex-row justify-between items-center p-0 w-full">
+                      <div>
+                        <h3 class="card-title text-sm font-medium text-zinc-200 group-hover:text-white">
+                          {item.title}
+                        </h3>
+                        <p class="text-xs text-zinc-500">{item.note}</p>
+                      </div>
+                      <span class="btn btn-xs btn-ghost text-xs text-zinc-500 uppercase tracking-widest group-hover:text-zinc-300">
+                        Open
+                      </span>
+                    </div>
                   </a>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))
+            }
           </ul>
         </section>
 
-        <section class="space-y-4" aria-labelledby="extras-title">
+        <!-- OPTIONAL (Extras) -->
+        <section aria-label="Optional Links" class="space-y-4">
           <div class="flex items-center justify-between">
-            <h2 id="extras-title" class="text-lg font-semibold text-zinc-100">EXTRAS</h2>
-            <span class="text-xs uppercase tracking-[0.25em] text-zinc-500">Optional</span>
+            <h2
+              class="text-xs uppercase tracking-[0.25em] text-zinc-500 font-semibold"
+            >
+              Optional
+            </h2>
           </div>
-          <ul class="space-y-3">
-            {extras.map((item) => (
-              <li class="flex flex-col gap-2 rounded-lg border border-zinc-900 bg-zinc-950/60 p-4">
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-medium text-zinc-100">{item.title}</p>
-                    <p class="text-xs text-zinc-500">{item.note}</p>
-                  </div>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {
+              optionalLinks.map((item) => (
+                <li>
                   <a
-                    class="rounded-md border border-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
                     href={item.href}
+                    class="card card-compact bg-transparent border border-zinc-900/50 hover:border-zinc-800 p-3 rounded-lg transition-colors group"
                   >
-                    Open
+                    <div class="card-body p-0">
+                      <h3 class="text-sm text-zinc-400 group-hover:text-zinc-300 text-center sm:text-left">
+                        {item.title}
+                      </h3>
+                    </div>
                   </a>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))
+            }
           </ul>
         </section>
       </div>

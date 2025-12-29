@@ -1,0 +1,100 @@
+---
+import "../styles/global.css";
+
+const nowLive = [
+  { title: "Link One", href: "#", note: "Placeholder" },
+  { title: "Link Two", href: "#", note: "Placeholder" },
+  { title: "Link Three", href: "#", note: "Placeholder" },
+];
+
+const extras = [
+  { title: "Extra One", href: "#", note: "Placeholder" },
+  { title: "Extra Two", href: "#", note: "Placeholder" },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tap.robpins.me</title>
+    <!-- Analytics placeholder: add here if needed -->
+  </head>
+  <body class="bg-zinc-950 text-zinc-100">
+    <main class="min-h-screen px-6 py-10">
+      <div class="mx-auto w-full max-w-2xl space-y-12">
+        <section class="space-y-4" aria-labelledby="hero-title">
+          <div class="space-y-2">
+            <p class="text-xs uppercase tracking-[0.35em] text-zinc-400">Tap Switchboard</p>
+            <h1 id="hero-title" class="text-3xl font-semibold text-zinc-50">tap.robpins.me</h1>
+            <p class="text-sm text-zinc-400">Primary links and current drops.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a
+              class="rounded-md border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-100 hover:border-zinc-500"
+              href="#"
+            >
+              Primary Button
+            </a>
+            <a
+              class="rounded-md border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
+              href="#"
+            >
+              Secondary Button
+            </a>
+          </div>
+        </section>
+
+        <section class="space-y-4" aria-labelledby="now-live-title">
+          <div class="flex items-center justify-between">
+            <h2 id="now-live-title" class="text-lg font-semibold text-zinc-100">NOW LIVE</h2>
+            <span class="text-xs uppercase tracking-[0.25em] text-zinc-500">Updated</span>
+          </div>
+          <ul class="space-y-3">
+            {nowLive.map((item) => (
+              <li class="flex flex-col gap-2 rounded-lg border border-zinc-900 bg-zinc-950/60 p-4">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <p class="text-sm font-medium text-zinc-100">{item.title}</p>
+                    <p class="text-xs text-zinc-500">{item.note}</p>
+                  </div>
+                  <a
+                    class="rounded-md border border-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
+                    href={item.href}
+                  >
+                    Open
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="space-y-4" aria-labelledby="extras-title">
+          <div class="flex items-center justify-between">
+            <h2 id="extras-title" class="text-lg font-semibold text-zinc-100">EXTRAS</h2>
+            <span class="text-xs uppercase tracking-[0.25em] text-zinc-500">Optional</span>
+          </div>
+          <ul class="space-y-3">
+            {extras.map((item) => (
+              <li class="flex flex-col gap-2 rounded-lg border border-zinc-900 bg-zinc-950/60 p-4">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <p class="text-sm font-medium text-zinc-100">{item.title}</p>
+                    <p class="text-xs text-zinc-500">{item.note}</p>
+                  </div>
+                  <a
+                    class="rounded-md border border-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300 hover:border-zinc-500 hover:text-zinc-100"
+                    href={item.href}
+                  >
+                    Open
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

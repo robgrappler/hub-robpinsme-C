@@ -31,5 +31,38 @@ const { title = "Rob Pins", description = "Public links and projects." } =
     <main class="min-h-screen">
       <slot />
     </main>
+
+    <script is:inline>
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("opacity-0", "translate-y-4");
+            entry.target.classList.add("animate-fade-in-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      function initObserver() {
+        const elements = document.querySelectorAll(".observer-fade-in-up");
+        elements.forEach((el) => {
+          // Progressive Enhancement: Hide elements only if JS runs
+          el.classList.add("opacity-0", "translate-y-4");
+          observer.observe(el);
+        });
+      }
+
+      // Run on initial load
+      initObserver();
+
+      // Run on view transitions (Astro)
+      document.addEventListener("astro:after-swap", initObserver);
+    </script>
   </body>
 </html>

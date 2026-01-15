@@ -21,8 +21,8 @@ export const ui = {
         'nav.home': 'Inicio',
         'nav.start': 'Empieza Aquí',
         'nav.twitter': 'Twitter',
-        'hero.title': 'Rob Grappler',
-        'hero.subtitle': 'Submission Grappling y Lucha',
+        'hero.title': 'Robgrappler\'s',
+        'hero.subtitle': 'Grappling, Tecnología y Archivo Digital. (En Progreso)',
     },
 } as const;
 

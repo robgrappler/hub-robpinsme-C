@@ -1,0 +1,282 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BentoCard from "../../components/BentoCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import LanguagePicker from "../../components/LanguagePicker.astro";
+import { ui, defaultLang, useTranslations } from "../../i18n/ui";
+
+const lang = "es";
+const t = useTranslations(lang);
+
+// Fetch all links and sort by 'order'
+type LinkEntry = CollectionEntry<"links">;
+
+const links = (await getCollection("links"))
+    .filter((entry) => entry.slug.startsWith("es/"))
+    .sort((a: LinkEntry, b: LinkEntry) => a.data.order - b.data.order);
+
+const youtubeLink = links.find((l: LinkEntry) => l.slug === "es/02-youtube");
+const youtubeUrl = youtubeLink?.data.url || "#";
+
+const otherLinks = links.filter(
+    (l: LinkEntry) =>
+        ![
+            "es/01-start-here",
+            "es/02-youtube",
+            "es/03-newsletter",
+            "es/04-database",
+        ].includes(l.slug),
+);
+---
+
+<BaseLayout title="Robgrappler | Jardín Digital" lang={lang}>
+    <div class="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <header class="mb-12 flex flex-col gap-2">
+            <span
+                class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-sub-grey"
+            >
+                Matroom Digital v2.0
+            </span>
+            <div class="flex items-start justify-between">
+                <h1
+                    class="font-b612 text-5xl font-black tracking-tight text-white sm:text-7xl"
+                >
+                    {t("hero.title")}
+                </h1>
+                <LanguagePicker currentLang="es" />
+            </div>
+            <p class="max-w-xl font-sans text-lg text-sub-paper/80">
+                {t("hero.subtitle")}
+            </p>
+        </header>
+
+        <div
+            class="w-full max-w-7xl mx-auto p-4 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+        >
+            <!-- START HERE (col-span-2) -->
+            <a
+                href="/es/start"
+                class="col-span-2 md:col-span-2 bg-[#1a1a1a] border border-[#F5C265]/30 rounded-xl p-5 flex flex-col justify-between h-40 relative overflow-hidden group transition-all duration-300 hover:scale-[1.03] hover:border-[#F5C265]/80 hover:shadow-[0_0_35px_rgba(245,194,101,0.25)] focus-visible:scale-[1.02] focus-visible:border-[#F5C265]/80 focus-visible:shadow-[0_0_35px_rgba(245,194,101,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C265] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0e]"
+            >
+                <div class="z-10 relative">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span
+                            class="bg-[#2a2a2a] text-[#F5C265] text-xs font-bold px-1.5 py-0.5 rounded"
+                            >ST</span
+                        >
+                        <h3
+                            class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+                        >
+                            EMPIEZA AQUÍ
+                        </h3>
+                    </div>
+                    <p
+                        class="font-sans text-sm leading-relaxed max-w-[90%] text-sub-grey"
+                    >
+                        Elige un carril. Mira, explora el archivo o lee el
+                        desglose.
+                    </p>
+                </div>
+                <div
+                    class="self-end flex items-center gap-1.5 rounded bg-[#F5C265] text-black text-[10px] font-bold px-3 py-1.5 uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#F5C265]/20 group-hover:bg-white group-hover:-translate-y-0.5 group-hover:shadow-[#F5C265]/40 group-focus-visible:bg-white group-focus-visible:-translate-y-0.5 group-focus-visible:shadow-[#F5C265]/40"
+                >
+                    <span>Abrir</span>
+                    <svg
+                        class="h-2.5 w-2.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-0.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7 17L17 7M17 7H7M17 7V17"></path>
+                    </svg>
+                </div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent pointer-events-none"
+                >
+                </div>
+            </a>
+
+            <!-- THE ESSENTIALS (col-span-1) -->
+            <a
+                href={youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="col-span-1 md:row-span-2 bg-[#1a1a1a] border border-main-gold/60 rounded-xl p-4 flex flex-col justify-between h-auto min-h-[160px] relative group transition-all duration-300 hover:scale-[1.015] hover:border-main-gold hover:shadow-[0_0_20px_rgba(245,194,101,0.12)] focus-visible:scale-[1.01] focus-visible:border-main-gold focus-visible:shadow-[0_0_20px_rgba(245,194,101,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0e]"
+            >
+                <div class="flex items-center gap-3 mb-2">
+                    <div
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-main-gold/20"
+                    >
+                        <span
+                            class="font-bebas text-sm tracking-widest opacity-80 text-white group-hover:text-main-gold"
+                            >YT</span
+                        >
+                    </div>
+                    <h3
+                        class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+                    >
+                        LO ESENCIAL
+                    </h3>
+                </div>
+
+                <div
+                    class="relative z-10 flex items-end justify-between mt-auto"
+                >
+                    <span
+                        class="text-[10px] font-bold uppercase tracking-[0.25em] text-sub-grey group-hover:text-main-gold transition-colors"
+                    >
+                        Ver
+                    </span>
+                    <div
+                        class="group/btn flex items-center gap-2 rounded px-3 py-1.5 text-xs font-bold uppercase tracking-wider motion-safe:transition-all motion-safe:duration-300 border border-transparent bg-main-gold text-main-bg opacity-0 group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0 hover:bg-white hover:text-black motion-safe:hover:!scale-110 hover:shadow-xl"
+                    >
+                        <span>Ver</span>
+                        <svg
+                            class="h-3 w-3 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 17L17 7M17 7H7M17 7V17"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div
+                    class="pointer-events-none absolute -inset-px opacity-0 motion-safe:transition-opacity motion-safe:duration-300 group-hover:opacity-100"
+                    style="background: radial-gradient(600px circle at var(--x) var(--y), rgba(255, 176, 0, 0.06), transparent 40%);"
+                >
+                </div>
+            </a>
+
+            <!-- MATCH DB (col-span-1) -->
+            <a
+                href="/es/archive"
+                class="col-span-1 bg-[#1a1a1a] border border-[#F5C265]/25 rounded-xl p-4 flex flex-col justify-between h-auto min-h-[160px] group transition-all duration-300 hover:scale-[1.03] hover:border-[#F5C265]/80 hover:shadow-[0_0_35px_rgba(245,194,101,0.25)] focus-visible:scale-[1.02] focus-visible:border-[#F5C265]/80 focus-visible:shadow-[0_0_35px_rgba(245,194,101,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C265] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0e]"
+            >
+                <div class="flex items-center gap-3 mb-2">
+                    <div
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-main-gold/20"
+                    >
+                        <span
+                            class="font-bebas text-sm tracking-widest opacity-80 text-white group-hover:text-main-gold"
+                            >DB</span
+                        >
+                    </div>
+                    <h3
+                        class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+                    >
+                        BASE DE DATOS
+                    </h3>
+                </div>
+
+                <div
+                    class="relative z-10 flex items-end justify-between mt-auto"
+                >
+                    <span
+                        class="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500 group-hover:text-[#F5C265] group-focus-visible:text-[#F5C265] transition-colors"
+                    >
+                        Explorar
+                    </span>
+                    <div
+                        class="group/btn flex items-center gap-2 rounded px-3 py-1.5 text-xs font-bold uppercase tracking-wider motion-safe:transition-all motion-safe:duration-300 border border-transparent bg-white/5 text-white opacity-0 group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0 group-hover:bg-white/10 group-hover:border-white/10 motion-safe:hover:!scale-110 hover:shadow-xl"
+                    >
+                        <span>Explorar</span>
+                        <svg
+                            class="h-3 w-3 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 17L17 7M17 7H7M17 7V17"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- THE BREAKDOWN (col-span-2) -->
+            <a
+                href="/es/breakdown"
+                class="col-span-2 md:col-span-2 bg-[#1a1a1a] border border-purple-500/20 rounded-xl p-5 flex flex-col justify-between h-36 group transition-all duration-300 hover:scale-[1.01] hover:border-[#F5C265]/35 hover:shadow-[0_0_18px_rgba(245,194,101,0.1)] focus-visible:scale-[1.01] focus-visible:border-[#F5C265]/35 focus-visible:shadow-[0_0_18px_rgba(245,194,101,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C265] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0e]"
+            >
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-main-gold/20"
+                    >
+                        <span
+                            class="font-bebas text-sm tracking-widest opacity-80 text-white group-hover:text-main-gold"
+                            >NW</span
+                        >
+                    </div>
+                    <div>
+                        <h3
+                            class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+                        >
+                            EL DESGLOSE
+                        </h3>
+                        <p
+                            class="font-sans text-sm leading-relaxed text-sub-grey"
+                        >
+                            Notas semanales. Sin spam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-between mt-2">
+                    <span
+                        class="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500 group-hover:text-[#F5C265] group-focus-visible:text-[#F5C265] transition-colors"
+                    >
+                        Suscribirse
+                    </span>
+                    <div
+                        class="group/btn flex items-center gap-2 rounded px-3 py-1.5 text-xs font-bold uppercase tracking-wider motion-safe:transition-all motion-safe:duration-300 border border-transparent bg-white/5 text-white opacity-0 group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0 group-hover:bg-white/10 group-hover:border-white/10 motion-safe:hover:!scale-110 hover:shadow-xl"
+                    >
+                        <span>Suscribirse</span>
+                        <svg
+                            class="h-3 w-3 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 17L17 7M17 7H7M17 7V17"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Remaining Links -->
+            {
+                otherLinks.length > 0 &&
+                    otherLinks.map((link: LinkEntry) => (
+                        <BentoCard link={link} />
+                    ))
+            }
+        </div>
+
+        <footer
+            class="mt-20 border-t border-main-surface pt-8 text-center sm:text-left"
+        >
+            <p
+                class="font-sans text-xs text-sub-grey uppercase tracking-widest"
+            >
+                © {new Date().getFullYear()} Rob Grappler. Todos los derechos reservados.
+            </p>
+        </footer>
+    </div>
+</BaseLayout>

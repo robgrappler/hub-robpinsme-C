@@ -2,26 +2,40 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BentoCard from "../components/BentoCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import LanguagePicker from "../components/LanguagePicker.astro";
+import { ui, defaultLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(defaultLang);
 
 // Fetch all links and sort by 'order'
 type LinkEntry = CollectionEntry<"links">;
 
-const links = (await getCollection("links")).sort(
-  (a: LinkEntry, b: LinkEntry) => a.data.order - b.data.order,
-);
+const links = (await getCollection("links"))
+  .filter((entry) => entry.slug.startsWith("en/"))
+  .sort((a: LinkEntry, b: LinkEntry) => a.data.order - b.data.order);
 
-const youtubeLink = links.find((l: LinkEntry) => l.slug === "02-youtube");
+const youtubeLink = links.find((l: LinkEntry) => l.slug === "en/02-youtube");
 const youtubeUrl = youtubeLink?.data.url || "#";
 
 const otherLinks = links.filter(
   (l: LinkEntry) =>
-    !["01-start-here", "02-youtube", "03-newsletter", "04-database"].includes(
-      l.slug,
-    ),
+    ![
+      "en/01-start-here",
+      "en/02-youtube",
+      "en/03-newsletter",
+      "en/04-database",
+    ].includes(l.slug),
 );
 ---
 
 <BaseLayout title="Robgrappler's | Digital Garden">
+  <script is:inline>
+    const userLang = navigator.language || navigator.userLanguage;
+    const savedLang = localStorage.getItem("site-lang");
+    if (!savedLang && userLang.startsWith("es")) {
+      window.location.href = "/es/";
+    }
+  </script>
   <div class="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <header class="mb-12 flex flex-col gap-2">
       <span
@@ -29,13 +43,16 @@ const otherLinks = links.filter(
       >
         Digital Matroom v2.0
       </span>
-      <h1
-        class="font-b612 text-5xl font-black tracking-tight text-white sm:text-7xl"
-      >
-        Robgrappler's
-      </h1>
+      <div class="flex items-start justify-between">
+        <h1
+          class="font-b612 text-5xl font-black tracking-tight text-white sm:text-7xl"
+        >
+          {t("hero.title")}
+        </h1>
+        <LanguagePicker currentLang="en" />
+      </div>
       <p class="max-w-xl font-sans text-lg text-sub-paper/80">
-        Grappling, Tech and Digital Archiving. (Work in Progress)
+        {t("hero.subtitle")}
       </p>
     </header>
 
@@ -53,11 +70,15 @@ const otherLinks = links.filter(
               class="bg-[#2a2a2a] text-[#F5C265] text-xs font-bold px-1.5 py-0.5 rounded"
               >ST</span
             >
-            <h3 class="text-white font-bebas text-xl tracking-wide">
+            <h3
+              class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+            >
               START HERE
             </h3>
           </div>
-          <p class="text-gray-400 text-xs leading-relaxed max-w-[80%]">
+          <p
+            class="font-sans text-sm leading-relaxed max-w-[90%] text-sub-grey"
+          >
             Pick a lane. Watch, explore the archive, or read the breakdown.
           </p>
         </div>
@@ -100,7 +121,9 @@ const otherLinks = links.filter(
               >YT</span
             >
           </div>
-          <h3 class="text-white font-bebas text-lg leading-none">
+          <h3
+            class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+          >
             THE ESSENTIALS
           </h3>
         </div>
@@ -151,7 +174,11 @@ const otherLinks = links.filter(
               >DB</span
             >
           </div>
-          <h3 class="text-white font-bebas text-lg leading-none">MATCH DB</h3>
+          <h3
+            class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+          >
+            MATCH DB
+          </h3>
         </div>
 
         <div class="relative z-10 flex items-end justify-between mt-auto">
@@ -195,8 +222,14 @@ const otherLinks = links.filter(
             >
           </div>
           <div>
-            <h3 class="text-white font-bebas text-2xl">THE BREAKDOWN</h3>
-            <p class="text-sub-grey text-xs">Weekly notes. No spam.</p>
+            <h3
+              class="font-bebas text-3xl uppercase tracking-wide leading-none text-white"
+            >
+              THE BREAKDOWN
+            </h3>
+            <p class="font-sans text-sm leading-relaxed text-sub-grey">
+              Weekly notes. No spam.
+            </p>
           </div>
         </div>
 

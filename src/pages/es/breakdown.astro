@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsletterForm from "../../components/NewsletterForm.astro";
+---
+
+<BaseLayout title="El Desglose — Boletín" lang="es">
+  <div class="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <a class="btn btn-sm btn-ghost" href="/es/">Volver al Inicio</a>
+    </div>
+
+    <header class="mb-12 flex flex-col gap-2">
+      <span
+        class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-sub-grey"
+      >
+        Matroom Digital v2.0
+      </span>
+      <h1
+        class="font-b612 text-5xl font-black tracking-tight text-white sm:text-7xl"
+      >
+        El Desglose
+      </h1>
+      <p class="max-w-xl font-sans text-lg text-sub-paper/80">
+        Notas semanales. Sin spam. Solo señal.
+      </p>
+    </header>
+
+    <main class="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
+      <section
+        class="rounded-2xl border border-main-surface bg-main-surface/40 p-6"
+      >
+        <p
+          class="max-w-2xl font-sans text-sm leading-relaxed text-sub-paper/80"
+        >
+          Escritos breves y prácticos sobre sistemas de grappling, ideas de
+          entrenamiento y el flujo de trabajo tecnológico ocasional que hace que
+          toda la máquina funcione mejor.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <div class="w-full max-w-sm">
+            <NewsletterForm
+              id="main-form"
+              placeholder="Tu correo electrónico"
+              submitLabel="NOTIFÍCAME"
+            />
+          </div>
+          <a class="btn btn-sm btn-outline btn-ghost" href="/es/">
+            VOLVER AL INICIO
+          </a>
+        </div>
+
+        <ul class="mt-8 grid gap-2 text-sm text-sub-paper/80">
+          <li>Notas de combates y marcos de referencia</li>
+          <li>Experimentos de tecnología + flujos de trabajo</li>
+          <li>Llega cuando aterrizan nuevas entradas de archivo</li>
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-main-surface p-6">
+        <p class="font-b612 text-lg uppercase tracking-wide text-white">
+          Trabajo en progreso
+        </p>
+        <p class="mt-3 text-sm text-sub-paper/80">
+          Deja tu correo electrónico en el formulario principal y te avisaré
+          cuando esto esté totalmente en vivo.
+        </p>
+      </section>
+    </main>
+  </div>
+</BaseLayout>

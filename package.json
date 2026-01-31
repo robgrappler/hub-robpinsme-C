@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "predev": "npm run sync:matches",
     "build": "astro build",
+    "prebuild": "npm run sync:matches",
+    "sync:matches": "node ../shared/robpins-match-db/scripts/sync-matches.mjs --dest src/content/matches",
     "preview": "astro preview"
   },
   "dependencies": {

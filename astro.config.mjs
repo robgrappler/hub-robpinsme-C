@@ -10,5 +10,10 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  integrations: [tailwind({ applyBaseStyles: false })]
+  integrations: [tailwind({ applyBaseStyles: false })],
+  vite: {
+    ssr: {
+      noExternal: ["robpins-match-db"]
+    }
+  }
 });

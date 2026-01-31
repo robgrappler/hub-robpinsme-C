@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.16.5",
+    "astro": "^5.17.1",
     "flyonui": "^2.4.1"
   },
   "devDependencies": {
